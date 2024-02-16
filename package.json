@@ -1,0 +1,23 @@
+{
+  "name": "homework04-ishanpranav",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix *.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishanpranav/kaomoji.git"
+  },
+  "author": "Ishan Pranav",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ishanpranav/kaomoji/issues"
+  },
+  "homepage": "https://github.com/ishanpranav/kaomoji#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}
