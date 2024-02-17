@@ -2,11 +2,16 @@
 <!-- Copyright (c) 2024 Ishan Pranav -->
 <!-- Licensed under the MIT License. -->
 
-# Server
+# Kaomoji
 
-This is a static web server implemented in JavaScript for the NYU CSCI 467
-Applied Internet Technology course and distributed under the MIT License.
+A web application that replaces text with kaomoji, implemented for the NYU CSCI
+467 Applied Internet Technology course and distributed under the MIT License.
 
 # License
 
 This repository is licensed with the [MIT](LICENSE.txt) license.
+
+# Attribution
+
+The logo for this project was designed by
+[Ruslan Babkin on Flaticon](https://www.flaticon.com/free-icons/smile).
