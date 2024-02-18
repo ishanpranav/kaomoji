@@ -3,31 +3,39 @@
 // Licensed under the MIT license.
 
 import express from 'express';
-import { dirname, resolve } from 'path';
+import { readFile } from 'fs';
+import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { Kaomoji } from './kaomoji.mjs';
 
-const app = express();
-const basePath = dirname(fileURLToPath(import.meta.url));
-const publicPath = resolve(basePath, 'public');
+const rootDirectory = dirname(fileURLToPath(import.meta.url));
+const publicPath = resolve(rootDirectory, 'public');
+const kaomojiDataPath = join(rootDirectory, 'code-samples', 'kaomojiData.json');
 
-app.use(express.static(publicPath));
-app.use(express.urlencoded({
-    extended: false
-}));
-app.use((request, _, next) => {
-    console.log(request.method, request.path, request.query);
-    next();
-});
-app.set('view engine', 'hbs');
-app.get('/', (_, response) => {
-    response.redirect('/editor');
-});
-app.get('/dictionary', (_, response) => {
-    response.render('dictionary', {});
-});
-app.get('/editor', (_, response) => {
-    response.render('editor', {});
-});
-app.listen(3000);
+readFile(kaomojiDataPath, (err, data) => {
+    if (err) {
+        throw err;
+    }
 
-console.log('Started server on port 3000');
+    data = JSON.parse(data);
+
+    const kaomojiData = [];
+
+    for (const datum of data) {
+        kaomojiData.push(new Kaomoji(datum.value, datum.emotions));
+    }
+
+    console.log(kaomojiData);
+    express()
+        .use(express.static(publicPath))
+        .use(express.urlencoded({ extended: false }))
+        .use((request, _, next) => {
+            console.log(request.method, request.path, request.query);
+            next();
+        })
+        .set('view engine', 'hbs')
+        .get('/', (_, response) => response.redirect('/editor'))
+        .get('/dictionary', (_, response) => response.render('dictionary', {}))
+        .get('/editor', (_, response) => response.render('editor', {}))
+        .listen(3000);
+});

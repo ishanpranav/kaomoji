@@ -13,22 +13,25 @@ export class Kaomoji {
     constructor(value, emotions) {
         this.value = value;
         this.emotions = emotions;
-        this.emotionSet = new Set();
-
-        for (const emotion of emotions) {
-            this.emotionSet.add(emotion.toLowerCase());
-        }
     }
 
     /**
      * Determines if a given keyword describes the kaomoji. This method uses a
-     * case insensitive, amortized constant-time algorithm.
+     * case insensitive, linear-time algorithm.
      * 
      * @param {String} value the keyword to test.
      * @return {Boolean} `true` if the given value describes the kaomoji;
      *                   otherwise, `false`.
      */
     isEmotion(value) {
-        return this.emotionSet.has(value.toLowerCase());
+        value = value.toLowerCase();
+
+        for (const emotion of this.emotions) {
+            if (emotion.toLowerCase() === value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
