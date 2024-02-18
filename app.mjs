@@ -35,7 +35,9 @@ readFile(kaomojiDataPath, (err, data) => {
         })
         .set('view engine', 'hbs')
         .get('/', (_, response) => response.redirect('/editor'))
-        .get('/dictionary', (_, response) => response.render('dictionary', {}))
-        .get('/editor', (_, response) => response.render('editor', {}))
+        .get('/dictionary', (_, response) => response.render('dictionary', {
+            kaomojiData: kaomojiData
+        }))
+        .get('/editor', (_, response) => response.render('editor'))
         .listen(3000);
 });

@@ -3,3 +3,19 @@
 {{!-- Licensed under the MIT License. --}}
 
 <h2>Dictionary</h2>
+<table>
+    <tbody>
+        {{#each kaomojiData}}
+        <tr>
+            <td class="kaomoji-no-wrap">
+                <code>{{value}}</code>
+            </td>
+            <td>
+                {{#each emotions}}
+                    {{this}}{{#unless @last}},{{/unless}}
+                {{/each}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
