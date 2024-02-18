@@ -34,7 +34,6 @@ footer {
     font-size: 12pt;
     margin-top: 2em;
     padding: 2em;
-    text-align: center;
 }
 
 h1,
@@ -51,10 +50,6 @@ h1 {
 
 h2 {
     font-size: 1.5em;
-}
-
-header {
-    text-align: center;
 }
 
 input,
@@ -109,11 +104,6 @@ ul {
     margin-bottom: 0;
 }
 
-.kaomoji-container {
-    margin: 0 auto;
-    width: 60%;
-}
-
 .kaomoji-button {
     background-color: #f6f8fa;
     border: none;
@@ -123,6 +113,15 @@ ul {
 
 .kaomoji-button:hover {
     background-color: #d8dee4;
+}
+
+.kaomoji-center {
+    text-align: center;
+}
+
+.kaomoji-container {
+    margin: 0 auto;
+    width: 60%;
 }
 
 .kaomoji-no-wrap {
