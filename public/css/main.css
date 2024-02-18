@@ -21,13 +21,6 @@ body {
     word-wrap: break-word;
 }
 
-code,
-textarea {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
-        "Liberation Mono", monospace;
-    font-size: 11px;
-}
-
 footer {
     border-top: 1px solid #d8dee4;
     color: #656d76;
@@ -119,9 +112,29 @@ ul {
     text-align: center;
 }
 
+.kaomoji-code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 11px;
+}
+
 .kaomoji-container {
     margin: 0 auto;
     width: 60%;
+}
+
+.kaomoji-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.kaomoji-form-block {
+    flex-grow: 1;
+    margin-bottom: 0.5em;
+}
+
+.kaomoji-form-right {
+    margin-left: auto;
 }
 
 .kaomoji-form-inline {

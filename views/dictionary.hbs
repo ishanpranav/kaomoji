@@ -8,7 +8,7 @@
         name="emotion"
         type="text"
         class="kaomoji-form-inline-left kaomoji-full"
-        placeholder="Keywords..."/>
+        placeholder="Search..."/>
     <input
         type="submit"
         class="kaomoji-button kaomoji-form-inline-right"
@@ -19,7 +19,7 @@
         {{#each kaomojis}}
         <tr>
             <td class="kaomoji-center kaomoji-no-wrap">
-                <code>{{value}}</code>
+                <code class="kaomoji-code">{{value}}</code>
             </td>
             <td class="kaomoji-full">
                 {{#each emotions}}
@@ -30,3 +30,19 @@
         {{/each}}
     </tbody>
 </table>
+<form method="post" action="/dictionary" class="kaomoji-form-inline">
+    <input 
+        name="value"
+        type="text"
+        class="kaomoji-code kaomoji-form-inline-left"
+        placeholder="Your kaomoji!"/>
+    <input
+        name="emotions"
+        type="text"
+        class="kaomoji-form-inline-left kaomoji-form-inline-right kaomoji-full"
+        placeholder="Enter a list of comma-separated keywords..."/>
+    <input
+        type="submit"
+        class="kaomoji-button kaomoji-form-inline-right"
+        value="Add"/>
+</form>

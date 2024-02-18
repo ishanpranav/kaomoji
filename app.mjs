@@ -57,5 +57,15 @@ readFile(kaomojiDataPath, (err, data) => {
             });
         })
         .get('/editor', (_, response) => response.render('editor'))
+        .post('/dictionary', (request, response) => {
+            const emotions = request.body.emotions.split(',');
+
+            for (let i = 0; i < emotions.length; i++) {
+                emotions[i] = emotions[i].trim();
+            }
+            
+            kaomojis.push(new Kaomoji(request.body.value, emotions));
+            response.redirect('/dictionary');
+        })
         .listen(3000);
 });
