@@ -11,6 +11,13 @@ const basePath = dirname(fileURLToPath(import.meta.url));
 const publicPath = resolve(basePath, 'public');
 
 app.use(express.static(publicPath));
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use((request, _, next) => {
+    console.log(request.method, request.path, request.query);
+    next();
+});
 app.set('view engine', 'hbs');
 app.get('/', (_, response) => {
     response.redirect('/editor');
