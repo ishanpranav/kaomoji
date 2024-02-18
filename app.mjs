@@ -36,9 +36,16 @@ readFile(kaomojiDataPath, (err, data) => {
     data = JSON.parse(data);
 
     const kaomojis = [];
+    const kaomojiMap = new Map();
 
     for (const datum of data) {
-        kaomojis.push(new Kaomoji(datum.value, datum.emotions));
+        const kaomoji = new Kaomoji(datum.value, datum.emotions);
+
+        kaomojis.push(kaomoji);
+        
+        for (const emotion of datum.emotions) {
+            kaomojiMap.set(emotion.toLowerCase(), kaomoji);
+        }
     }
 
     console.log(kaomojis);
@@ -58,14 +65,35 @@ readFile(kaomojiDataPath, (err, data) => {
         })
         .get('/editor', (_, response) => response.render('editor'))
         .post('/dictionary', (request, response) => {
-            const emotions = request.body.emotions.split(',');
+            const emotions = request.body.emotions.split(",");
 
             for (let i = 0; i < emotions.length; i++) {
                 emotions[i] = emotions[i].trim();
             }
-            
+
             kaomojis.push(new Kaomoji(request.body.value, emotions));
             response.redirect('/dictionary');
+        })
+        .post('/editor', (request, response) => {
+            const matches = request.body.message.matchAll(/\w+/g);
+            const tokens = [];
+
+            for (const match of matches) {
+                const [word] = match;
+                const token = kaomojiMap.get(word.toLowerCase());
+
+                if (token) {
+                    tokens.push(token.value);
+
+                    continue;
+                }
+
+                tokens.push(word, ' ');
+            }
+
+            response.render('editor', {
+                response: tokens.join("")
+            });
         })
         .listen(3000);
 });

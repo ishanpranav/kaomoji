@@ -61,6 +61,10 @@ textarea:focus {
     outline: 2px solid #2f81f7;
 }
 
+textarea:read-only {
+    background-color: #f6f8fa;
+}
+
 li+li {
     margin-top: 0.25em;
 }
@@ -128,11 +132,6 @@ ul {
     flex-wrap: wrap;
 }
 
-.kaomoji-form-block {
-    flex-grow: 1;
-    margin-bottom: 0.5em;
-}
-
 .kaomoji-form-right {
     margin-left: auto;
 }
@@ -162,6 +161,22 @@ ul {
     width: 100%;
 }
 
+.kaomoji-grid-row {
+    display: flex;
+}
+
+.kaomoji-grid-column {
+    flex: 50%;
+}
+
 .kaomoji-no-wrap {
     white-space: nowrap;
+}
+
+.kaomoji-mb {
+    margin-bottom: 0.5em;
+}
+
+.kaomoji-mr {
+    margin-right: 0.5em;
 }
