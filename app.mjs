@@ -83,7 +83,7 @@ readFile(kaomojiDataPath, (err, data) => {
                 const token = kaomojiMap.get(word.toLowerCase());
 
                 if (token) {
-                    tokens.push(token.value);
+                    tokens.push(token.value, ' ');
 
                     continue;
                 }
