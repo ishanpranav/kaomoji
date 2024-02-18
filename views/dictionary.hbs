@@ -3,16 +3,27 @@
 {{!-- Licensed under the MIT License. --}}
 
 <h2>Dictionary</h2>
+<form method="get" action="/dictionary" class="kaomoji-form-inline">
+    <input
+        name="emotion"
+        type="text"
+        class="kaomoji-form-inline-left kaomoji-full"
+        placeholder="Keywords..."/>
+    <input
+        type="submit"
+        class="kaomoji-button kaomoji-form-inline-right"
+        value="Search"/>
+</form>
 <table>
     <tbody>
-        {{#each kaomojiData}}
+        {{#each kaomojis}}
         <tr>
             <td class="kaomoji-center kaomoji-no-wrap">
                 <code>{{value}}</code>
             </td>
-            <td>
+            <td class="kaomoji-full">
                 {{#each emotions}}
-                    {{this}}{{#unless @last}},{{/unless}}
+                {{this}}{{#unless @last}},{{/unless}}
                 {{/each}}
             </td>
         </tr>

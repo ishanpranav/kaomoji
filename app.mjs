@@ -12,6 +12,22 @@ const rootDirectory = dirname(fileURLToPath(import.meta.url));
 const publicPath = resolve(rootDirectory, 'public');
 const kaomojiDataPath = join(rootDirectory, 'code-samples', 'kaomojiData.json');
 
+function match(kaomojis, emotion) {
+    if (!emotion) {
+        return kaomojis;
+    }
+
+    const results = [];
+
+    for (const kaomoji of kaomojis) {
+        if (kaomoji.isEmotion(emotion)) {
+            results.push(kaomoji);
+        }
+    }
+
+    return results;
+}
+
 readFile(kaomojiDataPath, (err, data) => {
     if (err) {
         throw err;
@@ -19,13 +35,13 @@ readFile(kaomojiDataPath, (err, data) => {
 
     data = JSON.parse(data);
 
-    const kaomojiData = [];
+    const kaomojis = [];
 
     for (const datum of data) {
-        kaomojiData.push(new Kaomoji(datum.value, datum.emotions));
+        kaomojis.push(new Kaomoji(datum.value, datum.emotions));
     }
 
-    console.log(kaomojiData);
+    console.log(kaomojis);
     express()
         .use(express.static(publicPath))
         .use(express.urlencoded({ extended: false }))
@@ -35,9 +51,11 @@ readFile(kaomojiDataPath, (err, data) => {
         })
         .set('view engine', 'hbs')
         .get('/', (_, response) => response.redirect('/editor'))
-        .get('/dictionary', (_, response) => response.render('dictionary', {
-            kaomojiData: kaomojiData
-        }))
+        .get('/dictionary', (request, response) => {
+            response.render('dictionary', {
+                kaomojis: match(kaomojis, request.query.emotion)
+            });
+        })
         .get('/editor', (_, response) => response.render('editor'))
         .listen(3000);
 });
