@@ -59,19 +59,22 @@ readFile(kaomojiDataPath, (err, data) => {
         .set('view engine', 'hbs')
         .get('/', (_, response) => response.redirect('/editor'))
         .get('/dictionary', (request, response) => {
-            response.render('dictionary', {
+            response.render('list', {
                 kaomojis: match(kaomojis, request.query.emotion)
             });
         })
         .get('/editor', (_, response) => response.render('editor'))
         .post('/dictionary', (request, response) => {
             const emotions = request.body.emotions.split(",");
+            const added = new Kaomoji(request.body.value, emotions);
 
             for (let i = 0; i < emotions.length; i++) {
                 emotions[i] = emotions[i].trim();
+
+                kaomojiMap.set(emotions[i], added);
             }
 
-            kaomojis.push(new Kaomoji(request.body.value, emotions));
+            kaomojis.push(added);
             response.redirect('/dictionary');
         })
         .post('/editor', (request, response) => {
